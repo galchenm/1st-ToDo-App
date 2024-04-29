@@ -1,5 +1,3 @@
-wash
 hw
 clean
-wash
-wake up
+test

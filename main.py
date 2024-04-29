@@ -35,24 +35,39 @@ while True:
                     row = f'{index + 1} - {item}'
                     print(row)
         case "edit":
-            to_edit = int(input(user_edit))
-            if to_edit > len(to_dos):
-                print("You are out of range.")
-            else:
-                new_todo = input("Enter a new to-do: ")
-                to_dos[to_edit - 1] = new_todo
+            if not to_dos:
+                print("You have no to-dos.") 
+            else: 
+                try:             
+                    to_edit = int(input(user_edit))
+                    if to_edit > len(to_dos):
+                        print("You are out of range.")
+                    else:
+                        new_todo = input("Enter a new to-do: ")
+                        to_dos[to_edit - 1] = new_todo
+                        with open(to_dos_file, "w") as file:
+                            for item in to_dos:
+                                file.write(item + "\n")
+                except ValueError:
+                    print("Invalid input")
         case "complete":
-            try:
-                to_complete = int(input("Enter the number of to-do item you want to complete: "))
-                if to_complete > len(to_dos):
-                    print("You are out of range.")
-                else:
-                    to_dos.pop(to_complete - 1)
-                    with open(to_dos_file, "w") as file:
-                        for item in to_dos:
-                            file.write(item + "\n")
-            except ValueError:
-                print("Invalid input")
+                if not to_dos:
+                    print("You have no to-dos.") 
+                else:   
+                    to_complete = int(input("Enter the number of to-do item you want to complete: "))            
+                    if to_complete > len(to_dos):
+                        print("You are out of range.")
+                    else:
+                        try:
+                            removed_task = to_dos[to_complete - 1] 
+                            to_dos.pop(to_complete - 1)
+                            with open(to_dos_file, "w") as file:
+                                for item in to_dos:
+                                    file.write(item + "\n")
+                            message = "You have no to-dos." if not to_dos else f"{removed_task} has been removed."
+                            print(message)
+                        except ValueError:
+                            print("Invalid input")
         case "exit":
             with open(to_dos_file, "w") as file:
                 for item in to_dos:
