@@ -59,8 +59,9 @@ while True:
                         print("You are out of range.")
                     else:
                         try:
-                            removed_task = to_dos[to_complete - 1] 
-                            to_dos.pop(to_complete - 1)
+                            index = to_complete - 1
+                            removed_task = to_dos[index] 
+                            to_dos.pop(index)
                             with open(to_dos_file, "w") as file:
                                 for item in to_dos:
                                     file.write(item + "\n")
