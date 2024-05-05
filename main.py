@@ -20,7 +20,7 @@ else:
 while True:
     user_action = input(user_prompt).strip().lower()
     
-    if "add" in user_action:
+    if "add" in user_action or 'new' in user_action or 'more' in user_action:
         user_todo = user_action[4:]
         to_dos.append(user_todo)
         with open(to_dos_file, "a") as file:   
