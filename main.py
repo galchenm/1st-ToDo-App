@@ -71,6 +71,9 @@ while True:
                     except ValueError:
                         print("Invalid input. Please enter a number.")
                         continue
+                    except IndexError:
+                        print("Invalid input. Please enter a number within the range of number ot all items.")
+                        continue
     elif user_action.startswith("exit") or user_action.startswith("quit") or user_action.startswith("stop") or user_action.startswith("end"):
         with open(to_dos_file, "w") as file:
             for item in to_dos:
