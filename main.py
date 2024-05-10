@@ -49,6 +49,7 @@ while True:
                             file.write(item + "\n")
             except ValueError:
                 print("Invalid input. Please enter a number.")
+                continue
     elif user_action.startswith("complete") or user_action.startswith("done") or user_action.startswith("finish")  or user_action.startswith("remove"):
             if not to_dos:
                 print("You have no to-dos.") 
@@ -69,6 +70,7 @@ while True:
                         print(message)
                     except ValueError:
                         print("Invalid input. Please enter a number.")
+                        continue
     elif user_action.startswith("exit") or user_action.startswith("quit") or user_action.startswith("stop") or user_action.startswith("end"):
         with open(to_dos_file, "w") as file:
             for item in to_dos:
