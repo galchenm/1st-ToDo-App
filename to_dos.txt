@@ -5,4 +5,7 @@ workout
 clean
 hw
 add a new member
-angry alberto
+lunch
+test
+happy alberto
+moscow

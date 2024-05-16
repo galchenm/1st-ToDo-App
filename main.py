@@ -1,37 +1,43 @@
 import os
 from typing import List
 
-def get_todos():
+def get_todos(filename: str = "to_dos.txt") -> List[str]:
     script_dir = os.path.dirname(__file__)
-    to_dos_file = os.path.join(script_dir, "to_dos.txt")
-    to_dos: List[str]
+    to_dos_file = os.path.join(script_dir, filename)
+    to_dos_local: List[str]
 
     if not os.path.exists(to_dos_file):
-        to_dos = []
+        to_dos_local = []
         file = open(to_dos_file, "w")
         file.close()
     else:
         print("File exists")
         print(os.path.abspath(to_dos_file))
         with open(to_dos_file, "r") as file:
-            to_dos = file.readlines()
-            to_dos = [item.strip() for item in to_dos]
-    return to_dos
+            to_dos_local = file.readlines()
+            to_dos_local = [item.strip() for item in to_dos_local]
+    return to_dos_local
 
-def write_todos(to_dos: List[str]):
+
+def write_todos(to_dos_local: List[str], filename: str = "to_dos.txt") -> None:
     script_dir = os.path.dirname(__file__)
-    to_dos_file = os.path.join(script_dir, "to_dos.txt")
+    to_dos_file = os.path.join(script_dir, filename)
 
     with open(to_dos_file, "w") as file:
-        for item in to_dos:
+        for item in to_dos_local:
             file.write(item + "\n")
 
+user_prompt: str
 user_prompt = "Type add, show, edit, complete or exit: "
+script_dir: str
 script_dir = os.path.dirname(__file__)
+to_dos_file: str
 to_dos_file = os.path.join(script_dir, "to_dos.txt")
 to_dos: List[str]
 
 to_dos = get_todos()
+
+user_action: str
 
 while True:
     user_action = input(user_prompt).strip().lower()
@@ -55,7 +61,7 @@ while True:
             print("You have no to-dos.") 
         else: 
             try:             
-                to_edit = int(user_action[5:])
+                to_edit: int = int(user_action[5:])
                 if to_edit > len(to_dos):
                     print("You are out of range.")
                 else:
@@ -70,12 +76,12 @@ while True:
                 print("You have no to-dos.") 
             else:               
                 try:
-                    to_complete = int(user_action[9:])
-                    index = to_complete - 1
-                    removed_task = to_dos[index] 
+                    to_complete: int = int(user_action[9:])
+                    index: int = to_complete - 1
+                    removed_task: str = to_dos[index] 
                     to_dos.pop(index)
                     write_todos(to_dos)
-                    message = "You have no to-dos." if not to_dos else f"{removed_task} has been removed."
+                    message: str = "You have no to-dos." if not to_dos else f"{removed_task} has been removed."
                     print(message)
                 except ValueError:
                     print("Invalid input. Please enter a number.")
