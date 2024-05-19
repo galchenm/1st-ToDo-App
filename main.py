@@ -29,12 +29,7 @@ def write_todos(to_dos_local: List[str], filename: str = "to_dos.txt") -> None:
 
 user_prompt: str
 user_prompt = "Type add, show, edit, complete or exit: "
-script_dir: str
-script_dir = os.path.dirname(__file__)
-to_dos_file: str
-to_dos_file = os.path.join(script_dir, "to_dos.txt")
 to_dos: List[str]
-
 to_dos = get_todos()
 
 user_action: str
@@ -60,8 +55,11 @@ while True:
         if not to_dos:
             print("You have no to-dos.") 
         else: 
-            try:             
-                to_edit: int = int(user_action[5:])
+            try:
+                if not user_action[5:]:   
+                    to_edit: int = int(input("Enter the number of the to-do you want to edit: "))             
+                else:
+                    to_edit: int = int(user_action[5:])
                 if to_edit > len(to_dos):
                     print("You are out of range.")
                 else:
@@ -76,7 +74,10 @@ while True:
                 print("You have no to-dos.") 
             else:               
                 try:
-                    to_complete: int = int(user_action[9:])
+                    if not user_action[9:]:
+                        to_complete: int = int(input("Enter the number of the to-do you want to complete: "))
+                    else:
+                        to_complete: int = int(user_action[9:])
                     index: int = to_complete - 1
                     removed_task: str = to_dos[index] 
                     to_dos.pop(index)
