@@ -2,6 +2,14 @@ import os
 from typing import List
 
 def get_todos(filename: str = "to_dos.txt") -> List[str]:
+    """Reads the to-dos from a file and returns them as a list.
+
+    Args:
+        filename (str, optional): _description_. Defaults to "to_dos.txt".
+
+    Returns:
+        List[str]: _description_
+    """
     script_dir = os.path.dirname(__file__)
     to_dos_file = os.path.join(script_dir, filename)
     to_dos_local: List[str]
@@ -20,6 +28,12 @@ def get_todos(filename: str = "to_dos.txt") -> List[str]:
 
 
 def write_todos(to_dos_local: List[str], filename: str = "to_dos.txt") -> None:
+    """Writes the to-dos to a file.
+
+    Args:
+        to_dos_local (List[str]): _description_
+        filename (str, optional): _description_. Defaults to "to_dos.txt".
+    """
     script_dir = os.path.dirname(__file__)
     to_dos_file = os.path.join(script_dir, filename)
 
