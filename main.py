@@ -1,6 +1,10 @@
 import os
 from typing import List
 from modules import functions
+import datetime
+
+current_time = datetime.datetime.now()
+print(f"Today is {current_time:%A, %B %d, %Y, %I:%M:%S %p}")
 
 user_prompt: str
 user_prompt = "Type add, show, edit, complete or exit: "

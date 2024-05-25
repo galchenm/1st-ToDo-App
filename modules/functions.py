@@ -19,8 +19,6 @@ def get_todos(filename: str = "to_dos.txt") -> List[str]:
         file = open(to_dos_file, "w")
         file.close()
     else:
-        print("File exists")
-        print(os.path.abspath(to_dos_file))
         with open(to_dos_file, "r") as file:
             to_dos_local = file.readlines()
             to_dos_local = [item.strip() for item in to_dos_local]
