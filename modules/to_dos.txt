@@ -1,7 +1,6 @@
 hw
 lolita
-LOVE
-make myself happy
+correct
 love alberto
 Pizza
 FUN
@@ -9,9 +8,10 @@ exit
 clean
 hw
 love Alberto
-Love more Alberto
 Love
 german
 Master python
 Learn more
 Clean
+massage
+correct
