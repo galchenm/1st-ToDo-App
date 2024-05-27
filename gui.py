@@ -36,6 +36,13 @@ while True:
             to_dos[index] = new_todo
             functions.write_todos(to_dos)
             window['todos'].update(values=to_dos)
+        case "Completed":
+            todo_to_complete = values['todos'][0]
+            to_dos = functions.get_todos()
+            index = to_dos.index(todo_to_complete)
+            to_dos.pop(index)
+            functions.write_todos(to_dos)
+            window['todos'].update(values=to_dos)
         case sg.WIN_CLOSED:
             break
 
