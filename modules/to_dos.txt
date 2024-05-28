@@ -3,7 +3,6 @@ lolita
 correct
 love alberto
 Pizza
-FUN
 exit
 clean
 hw

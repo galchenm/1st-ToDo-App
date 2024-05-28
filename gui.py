@@ -1,6 +1,10 @@
 from modules import functions
 import FreeSimpleGUI as sg
+import time
 
+sg.theme('DarkAmber')
+
+clock = sg.Text('',key="clock")
 add_label = sg.Text("Type in a to-do")
 add_input_box = sg.InputText(tooltip="Enter to-do", key="todo")
 add_button = sg.Button("Add")
@@ -12,7 +16,7 @@ edit_button = sg.Button("Edit")
 complete_button = sg.Button("Completed")
 exit_button = sg.Button("Exit")
 
-layout = [[add_label], 
+layout = [[clock],[add_label], 
             [add_input_box, add_button], 
             [list_box, edit_button, complete_button],
             [exit_button]]
@@ -21,7 +25,8 @@ window = sg.Window('My To-Do App',
                    layout=layout, 
                    font=('Helvetica', 16))
 while True:
-    event, values = window.read()
+    event, values = window.read(timeout=200)
+    window['clock'].update(value=time.strftime("%b %d, %Y %H:%M:%S"))
     match event:
         case "Add":
             to_dos = functions.get_todos()
@@ -30,20 +35,26 @@ while True:
             functions.write_todos(to_dos)
             window['todos'].update(values=to_dos)
         case "Edit":
-            todo_to_edit = values['todos'][0]
-            new_todo = values['todo']
-            to_dos = functions.get_todos()
-            index = to_dos.index(todo_to_edit)
-            to_dos[index] = new_todo
-            functions.write_todos(to_dos)
-            window['todos'].update(values=to_dos)
+            try:
+                todo_to_edit = values['todos'][0]
+                new_todo = values['todo']
+                to_dos = functions.get_todos()
+                index = to_dos.index(todo_to_edit)
+                to_dos[index] = new_todo
+                functions.write_todos(to_dos)
+                window['todos'].update(values=to_dos)
+            except IndexError:
+                sg.popup("Please select a to-do to edit.", font=('Helvetica', 16))        
         case "Completed":
-            todo_to_complete = values['todos'][0]
-            to_dos = functions.get_todos()
-            to_dos.remove(todo_to_complete)
-            functions.write_todos(to_dos)
-            window['todos'].update(values=to_dos)
-            window['todo'].update(value="")
+            try:
+                todo_to_complete = values['todos'][0]
+                to_dos = functions.get_todos()
+                to_dos.remove(todo_to_complete)
+                functions.write_todos(to_dos)
+                window['todos'].update(values=to_dos)
+                window['todo'].update(value="")
+            except IndexError:
+                sg.popup("Please select a to-do to complete.", font=('Helvetica', 16))
         case 'todos':
             window['todo'].update(value=values['todos'][0])
         case "Exit":
