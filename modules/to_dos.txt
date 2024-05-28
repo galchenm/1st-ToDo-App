@@ -1,7 +1,5 @@
 hw
 lolita
-correct
-love alberto
 Pizza
 exit
 clean
@@ -14,3 +12,4 @@ Learn more
 Clean
 massage
 correct
+check
