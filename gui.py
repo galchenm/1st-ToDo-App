@@ -40,10 +40,11 @@ while True:
         case "Completed":
             todo_to_complete = values['todos'][0]
             to_dos = functions.get_todos()
-            index = to_dos.index(todo_to_complete)
-            to_dos.pop(index)
+            to_dos.remove(todo_to_complete)
             functions.write_todos(to_dos)
             window['todos'].update(values=to_dos)
+        case 'todos':
+            window['todo'].update(value=values['todos'][0])
         case "Exit":
             break
         case sg.WIN_CLOSED:
