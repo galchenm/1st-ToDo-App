@@ -43,6 +43,7 @@ while True:
             to_dos.remove(todo_to_complete)
             functions.write_todos(to_dos)
             window['todos'].update(values=to_dos)
+            window['todo'].update(value="")
         case 'todos':
             window['todo'].update(value=values['todos'][0])
         case "Exit":
